@@ -2,9 +2,19 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/status/:merchantId/:orderId', (req, res) => {
-    console.log(`Received payment status request for merchant '${req.params.merchantId}' and order '${req.params.orderId}'.`)
-    return res.send({ merchantId: 1000, orderId: 1, amount: 100.00, currency: 'EUR', status: 100});
+/**
+ * This function comment is parsed by doctrine
+ * @route GET /payment/status
+ * @group payment - Get payment order status
+ * @param {string} merchantId.query.required - merchant Id 
+ * @param {string} orderId.query.required - order Id
+ * @returns {object} 200 - A json of order detail
+ * @returns {Error}  default - Unexpected error
+ * @produces application/json
+ */
+router.get('/status', (req, res) => {
+    console.log(`Received payment status request for merchant '${req.query.merchantId}' and order '${req.query.orderId}'.`)
+    return res.send({ merchantId: req.query.merchantId, orderId: req.query.orderId, amount: 100.00, currency: 'EUR', status: 100});
 });
 
 export default router;

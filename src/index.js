@@ -2,9 +2,13 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 
+import models from './models';
 import routes from './routes';
 
 const app = express();
+
+const expressSwagger = require('express-swagger-generator')(app);
+expressSwagger(models.swagger.options);
 
 // * Application-Level Middleware * //
 
